@@ -1,2 +1,8 @@
-C:\Workspace\EclipsePhoton\JoarSystem\JoarSystem\src\com\joar\fact\controller\ProductoController.java
-C:\Workspace\EclipsePhoton\JoarSystem\JoarSystem\src\com\joar\fact\controller\IndexController.java
+C:\Workspace\EclipsePhoton\JoarSystem\JoarSystem\src\com\joar\fact\controller\view\ProductoController.java
+C:\Workspace\EclipsePhoton\JoarSystem\JoarSystem\src\com\joar\fact\db\beans\Usuario.java
+C:\Workspace\EclipsePhoton\JoarSystem\JoarSystem\src\com\joar\fact\db\DSourceX.java
+C:\Workspace\EclipsePhoton\JoarSystem\JoarSystem\src\com\joar\fact\db\MySqlUsuario.java
+C:\Workspace\EclipsePhoton\JoarSystem\JoarSystem\src\com\joar\fact\controller\view\IndexController.java
+C:\Workspace\EclipsePhoton\JoarSystem\JoarSystem\src\com\joar\fact\controller\view\LoginController.java
+C:\Workspace\EclipsePhoton\JoarSystem\JoarSystem\src\com\joar\fact\config\StartupApplicationListener.java
+C:\Workspace\EclipsePhoton\JoarSystem\JoarSystem\src\com\joar\fact\config\Ctes.java
