@@ -38,8 +38,8 @@ public class MySqlUsuario {
 				ps.setString(1, strUsu);
 				ps.setString(2, clave);
 				try (ResultSet rs = ps.executeQuery()) {
-					usuario = new Usuario();
 					if(rs.next()) {
+						usuario = new Usuario();
 						usuario.setIdUsuario(rs.getInt("idUsuario"));
 						usuario.setUsuario(rs.getString("usuario"));
 						usuario.setClave(rs.getString("clave"));

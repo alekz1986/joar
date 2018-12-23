@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.joar.fact.db.MySqlUsuario;
 import com.joar.fact.db.beans.Usuario;
@@ -34,18 +36,25 @@ public class LoginController {
 
 	@GetMapping("/inicial")
 	public String login(Model model) {
+		String mensaje = (String) model.asMap().get("error");
+		model.addAttribute("errorx", "errorx");
+		System.out.println("mensaje = " + mensaje);
 		return "login"; 
 	}
 
 	@PostMapping("/ingresar")
-	public String ingresar(@RequestBody Map<String,Object> body) throws SQLException {
+	//public String ingresar(@RequestBody Map<String,Object> body) throws SQLException {
+	public String ingresar(@RequestParam String usuario, @RequestParam String chash,
+			RedirectAttributes ra) throws SQLException {
 		System.out.println("ingreso a ingresar");
-		String strUsuario = (String)body.get("usuario");
-		String clave = (String)body.get("claveHash");
-		Usuario usuario = mySqlUsuario.getUsuario(strUsuario, clave);
-		if (usuario != null)
-			return "redirect:/login/home";
-		return "redirect:/login/inicial";
+		System.out.println("strUsuario = " + usuario);
+		System.out.println("clave = " + chash);
+		Usuario usu = mySqlUsuario.getUsuario(usuario, chash);
+		if (usu == null) {
+			ra.addFlashAttribute("error", "Usuario y/o clave incorrecta.");
+			return "redirect:/login/inicial";
+		}
+		return "redirect:/login/home";
 	}
 	
 	@GetMapping("/home")
