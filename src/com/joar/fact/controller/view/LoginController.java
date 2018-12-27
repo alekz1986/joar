@@ -34,7 +34,7 @@ public class LoginController {
 		this.mySqlUsuario = mySqlUsuario;
 	}
 
-	@GetMapping("/inicial")
+	@GetMapping("/")
 	public String login(Model model) {
 		String mensaje = (String) model.asMap().get("error");
 		model.addAttribute("errorx", "errorx");
@@ -52,15 +52,11 @@ public class LoginController {
 		Usuario usu = mySqlUsuario.getUsuario(usuario, chash);
 		if (usu == null) {
 			ra.addFlashAttribute("error", "Usuario y/o clave incorrecta.");
-			return "redirect:/login/inicial";
+			return "redirect:/login/";
 		}
-		return "redirect:/login/home";
+		return "redirect:/home/";
 	}
 	
-	@GetMapping("/home")
-	public String home() {
-		System.out.println("ingreso a home");
-		return "home";
-	}
+	
 	
 }
