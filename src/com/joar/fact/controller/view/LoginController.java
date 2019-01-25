@@ -3,6 +3,8 @@ package com.joar.fact.controller.view;
 import java.sql.SQLException;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.joar.fact.config.Ctes;
 import com.joar.fact.db.MySqlUsuario;
 import com.joar.fact.db.beans.Usuario;
 
@@ -24,15 +27,8 @@ public class LoginController {
 	@Autowired
 	private MySqlUsuario mySqlUsuario;
 	
-	
-
-	public MySqlUsuario getMySqlUsuario() {
-		return mySqlUsuario;
-	}
-
-	public void setMySqlUsuario(MySqlUsuario mySqlUsuario) {
-		this.mySqlUsuario = mySqlUsuario;
-	}
+	public MySqlUsuario getMySqlUsuario() { return mySqlUsuario; }
+	public void setMySqlUsuario(MySqlUsuario mySqlUsuario) { this.mySqlUsuario = mySqlUsuario; }
 
 	@GetMapping("/")
 	public String login(Model model) {
@@ -45,7 +41,7 @@ public class LoginController {
 	@PostMapping("/ingresar")
 	//public String ingresar(@RequestBody Map<String,Object> body) throws SQLException {
 	public String ingresar(@RequestParam String usuario, @RequestParam String chash,
-			RedirectAttributes ra) throws SQLException {
+			RedirectAttributes ra, HttpSession httpSession) throws SQLException {
 		System.out.println("ingreso a ingresar");
 		System.out.println("strUsuario = " + usuario);
 		System.out.println("clave = " + chash);
@@ -54,6 +50,7 @@ public class LoginController {
 			ra.addFlashAttribute("error", "Usuario y/o clave incorrecta.");
 			return "redirect:/login/";
 		}
+		httpSession.setAttribute(Ctes.Session.USUARIO, usu);
 		return "redirect:/home/";
 	}
 	

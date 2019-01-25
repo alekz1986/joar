@@ -1,3 +1,16 @@
 .login-marca-agua {
 	margin-left: -46px;
 }
+
+.m-form-bottom-fix {
+	padding-top: 0px !important;
+	padding-bottom: 0px;	
+}
+
+.m-form-bottom-fix > div {
+	padding-bottom: 15px;
+}
+
+.m-switch--j-success input:checked ~ span:after {
+	background-color: #34bfa3;
+}

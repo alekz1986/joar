@@ -14,20 +14,12 @@ import org.springframework.stereotype.Component;
 
 import com.joar.fact.db.beans.Usuario;
 
-@Configuration
 @Component
 public class MySqlUsuario {
 
 	@Autowired
 	@Qualifier("dbDataSource")
 	private DataSource dataSource;
-	
-	public DataSource getDataSource() {
-		return dataSource;
-	}
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
 
 
 	public Usuario getUsuario(String strUsu, String clave) throws SQLException {

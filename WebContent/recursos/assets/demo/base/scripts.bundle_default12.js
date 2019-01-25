@@ -1638,7 +1638,7 @@ var mApp = function() {
             var el = $(target);
 
             options = $.extend(true, {
-                opacity: 0.03,            	
+                opacity: 0.03,
                 overlayColor: '#000000',
                 state: 'brand',
                 type: 'loader',
@@ -1696,21 +1696,18 @@ var mApp = function() {
                     backgroundColor: 'none',
                     width: options.width
                 },
-                //comentado overlayCSS por Alex
-                /*overlayCSS: {
+                overlayCSS: {
                     backgroundColor: options.overlayColor,
                     opacity: options.opacity,
                     cursor: 'wait',
                     zIndex: '10'
-                }, */
+                },
                 onUnblock: function() {
                     if (el && el[0]) {
                         mUtil.css(el[0], 'position', '');
                         mUtil.css(el[0], 'zoom', '');
                     }                    
-                },
-                //theme: true, //agregado por Alex
-                baseZ: 2000, //agregado por Alex
+                }
             };
 
             if (target == 'body') {
@@ -5151,38 +5148,6 @@ $(document).ready(function() {
   };
 
 }(jQuery));
-var defaults = {
-	layout: {
-		icons: {
-			pagination: {
-				next: 'la la-angle-right',
-				prev: 'la la-angle-left',
-				first: 'la la-angle-double-left',
-				last: 'la la-angle-double-right',
-				more: 'la la-ellipsis-h',
-			},
-			rowDetail: {expand: 'fa fa-caret-down', collapse: 'fa fa-caret-right'},
-		}
-	}
-};
-
-if (mUtil.isRTL()) {
-	defaults = {
-		layout: {
-			icons: {
-				pagination: {
-					next: 'la la-angle-left',
-					prev: 'la la-angle-right',
-					last: 'la la-angle-double-left',
-					first: 'la la-angle-double-right',
-				},
-				rowDetail: {collapse: 'fa fa-caret-down', expand: 'fa fa-caret-right'},
-			}
-		}
-	}
-}
-
-$.extend(true, $.fn.mDatatable.defaults, defaults);
 var mDropdown = function(elementId, options) {
     //== Main object
     var the = this;
@@ -9192,7 +9157,6 @@ var mLayout = function() {
     var asideLeftHide;
     var scrollTop;
     var quicksearch;
-    var mainPortlet;
 
     //== Header
     var initStickyHeader = function() {
@@ -9200,7 +9164,7 @@ var mLayout = function() {
         var headerEl = mUtil.get('m_header');
         var options = {
             offset: {},
-            minimize: {}
+            minimize:{}       
         };
 
         if (mUtil.attr(headerEl, 'm-minimize-mobile') == 'hide') {
@@ -9225,13 +9189,13 @@ var mLayout = function() {
 
         if (tmp = mUtil.attr(headerEl, 'm-minimize-mobile-offset')) {
             options.offset.mobile = tmp;
-        }
+        }        
 
         header = new mHeader('m_header', options);
     }
 
     //== Hor menu
-    var initHorMenu = function() {
+    var initHorMenu = function() { 
         // init aside left offcanvas
         horMenuOffcanvas = new mOffcanvas('m_header_menu', {
             overlay: true,
@@ -9240,18 +9204,18 @@ var mLayout = function() {
             toggleBy: {
                 target: 'm_aside_header_menu_mobile_toggle',
                 state: 'm-brand__toggler--active'
-            }
+            }            
         });
-
+        
         horMenu = new mMenu('m_header_menu', {
             submenu: {
                 desktop: 'dropdown',
                 tablet: 'accordion',
                 mobile: 'accordion'
             },
-            accordion: {
-                slideSpeed: 200, // accordion toggle slide speed in milliseconds
-                expandAll: false // allow having multiple expanded accordions in the menu
+            accordion: {   
+                slideSpeed: 200,  // accordion toggle slide speed in milliseconds
+                expandAll: false   // allow having multiple expanded accordions in the menu
             }
         });
     }
@@ -9263,12 +9227,12 @@ var mLayout = function() {
         var menuDesktopMode = (mUtil.attr(menu, 'm-menu-dropdown') === '1' ? 'dropdown' : 'accordion');
 
         var scroll;
-        if (mUtil.attr(menu, 'm-menu-scrollable') === '1') {
+        if ( mUtil.attr(menu, 'm-menu-scrollable') === '1' ) {
             scroll = {
                 height: function() {
                     if (mUtil.isInResponsiveRange('desktop')) {
                         return mUtil.getViewPort().height - parseInt(mUtil.css('m_header', 'height'));
-                    }                   
+                    }
                 }
             };
         }
@@ -9284,19 +9248,19 @@ var mLayout = function() {
                     default: menuDesktopMode,
                     // whenever body has this class switch the menu mode to dropdown
                     state: {
-                        body: 'm-aside-left--minimize',
+                        body: 'm-aside-left--minimize',  
                         mode: 'dropdown'
                     }
                 },
                 tablet: 'accordion', // menu set to accordion in tablet mode
-                mobile: 'accordion' // menu set to accordion in mobile mode
+                mobile: 'accordion'  // menu set to accordion in mobile mode
             },
 
             //accordion setup
             accordion: {
                 autoScroll: false, // enable auto scrolling(focus) to the clicked menu item
-                expandAll: false // allow having multiple expanded accordions in the menu
-            }
+                expandAll: false   // allow having multiple expanded accordions in the menu
+            }            
         });
     }
 
@@ -9313,9 +9277,9 @@ var mLayout = function() {
             closeBy: 'm_aside_left_close_btn',
             toggleBy: {
                 target: 'm_aside_left_offcanvas_toggle',
-                state: 'm-brand__toggler--active'
-            }
-        });
+                state: 'm-brand__toggler--active'                
+            }            
+        });     
 
         //== Handle minimzied aside hover
         if (mUtil.hasClass(body, 'm-aside-left--fixed')) {
@@ -9326,7 +9290,7 @@ var mLayout = function() {
                 if (outsideTm) {
                     clearTimeout(outsideTm);
                     outsideTm = null;
-                }
+                }                    
 
                 insideTm = setTimeout(function() {
                     if (mUtil.hasClass(body, 'm-aside-left--minimize') && mUtil.isInResponsiveRange('desktop')) {
@@ -9343,7 +9307,7 @@ var mLayout = function() {
                     clearTimeout(insideTm);
                     insideTm = null;
                 }
-
+                    
                 outsideTm = setTimeout(function() {
                     if (mUtil.hasClass(body, 'm-aside-left--minimize-hover') && mUtil.isInResponsiveRange('desktop')) {
                         mUtil.removeClass(body, 'm-aside-left--minimize-hover');
@@ -9352,13 +9316,13 @@ var mLayout = function() {
                         asideMenu.scrollerTop();
                     }
                 }, 500);
-            });
-        }
+            }); 
+        } 
     }
 
     //== Sidebar toggle
     var initLeftAsideToggle = function() {
-        if ($('#m_aside_left_minimize_toggle').length === 0) {
+        if ($('#m_aside_left_minimize_toggle').length === 0 ) {
             return;
         }
 
@@ -9366,13 +9330,9 @@ var mLayout = function() {
             target: 'body',
             targetState: 'm-brand--minimize m-aside-left--minimize',
             togglerState: 'm-brand__toggler--active'
-        }); 
+        });
 
-        asideLeftToggle.on('toggle', function(toggle) {     
-            if (mUtil.get('main_portlet')) {
-                mainPortlet.updateSticky();      
-            } 
-            
+        asideLeftToggle.on('toggle', function(toggle) {
             horMenu.pauseDropdownHover(800);
             asideMenu.pauseDropdownHover(800);
 
@@ -9381,13 +9341,6 @@ var mLayout = function() {
             // to set default minimized left aside use this cookie value in your 
             // server side code and add "m-brand--minimize m-aside-left--minimize" classes to 
             // the body tag in order to initialize the minimized left aside mode during page loading.
-        });
-
-        asideLeftToggle.on('beforeToggle', function(toggle) {   
-            var body = mUtil.get('body'); 
-            if (mUtil.hasClass(body, 'm-aside-left--minimize') === false && mUtil.hasClass(body, 'm-aside-left--minimize-hover')) {
-                mUtil.removeClass(body, 'm-aside-left--minimize-hover');
-            }
         });
     }
 
@@ -9419,54 +9372,39 @@ var mLayout = function() {
     var initTopbar = function() {
         $('#m_aside_header_topbar_mobile_toggle').click(function() {
             $('body').toggleClass('m-topbar--on');
-        });
-
-        // Animated Notification Icon 
-        /*
-        setInterval(function() {
-            $('#m_topbar_notification_icon .m-nav__link-icon').addClass('m-animate-shake');
-            $('#m_topbar_notification_icon .m-nav__link-badge').addClass('m-animate-blink');
-        }, 3000);
-
-        setInterval(function() {
-            $('#m_topbar_notification_icon .m-nav__link-icon').removeClass('m-animate-shake');
-            $('#m_topbar_notification_icon .m-nav__link-badge').removeClass('m-animate-blink');
-        }, 6000);
-        */
+        });           
     }
 
     //== Quicksearch
     var initQuicksearch = function() {
-        if ($('#m_quicksearch').length === 0) {
+        if ($('#m_quicksearch').length === 0 ) {
             return;
         }
 
         quicksearch = new mQuicksearch('m_quicksearch', {
-            mode: mUtil.attr('m_quicksearch', 'm-quicksearch-mode'), // quick search type
+            mode: mUtil.attr( 'm_quicksearch', 'm-quicksearch-mode' ), // quick search type
             minLength: 1
-        });
+        });    
 
         //<div class="m-search-results m-search-results--skin-light"><span class="m-search-result__message">Something went wrong</div></div>
 
         quicksearch.on('search', function(the) {
-            the.showProgress();
-
+            the.showProgress();  
+                      
             $.ajax({
                 url: 'https://keenthemes.com/metronic/themes/themes/metronic/dist/preview/inc/api/quick_search.php',
-                data: {
-                    query: the.query
-                },
+                data: {query: the.query},
                 dataType: 'html',
                 success: function(res) {
                     the.hideProgress();
-                    the.showResult(res);
+                    the.showResult(res);                     
                 },
                 error: function(res) {
                     the.hideProgress();
-                    the.showError('Connection error. Pleae try again later.');
+                    the.showError('Connection error. Pleae try again later.');      
                 }
             });
-        });
+        });  
     }
 
     //== Scrolltop
@@ -9477,62 +9415,10 @@ var mLayout = function() {
         });
     }
 
-    //== Main portlet(sticky portlet)
-    var createMainPortlet = function() {
-        return new mPortlet('main_portlet', {
-            sticky: {
-                offset: parseInt(mUtil.css( mUtil.get('m_header'), 'height')),
-                zIndex: 90,
-                position: {
-                    top: function() {
-                        return parseInt(mUtil.css( mUtil.get('m_header'), 'height') );
-                    },
-                    left: function() {
-                        var left = parseInt(mUtil.css( mUtil.getByClass('m-content'), 'paddingLeft'));
-                        
-                        if (mUtil.isInResponsiveRange('desktop')) {
-                            //left += parseInt(mUtil.css(mUtil.get('m_aside_left'), 'width') );
-                            if (mUtil.hasClass(mUtil.get('body'), 'm-aside-left--minimize')) {
-                                left += 78; // need to use hardcoded width of the minimize aside
-                            } else {
-                                left += 255; // need to use hardcoded width of the aside
-                            }
-                        } 
-
-                        return left; 
-                    },
-                    right: function() {
-                        return parseInt(mUtil.css( mUtil.getByClass('m-content'), 'paddingRight') );
-                    }
-                }
-            }
-        });
-    }
-
     return {
-        init: function() {
+        init: function() {  
             this.initHeader();
             this.initAside();
-            this.initMainPortlet();
-        },
-
-        initMainPortlet: function() {
-            if (!mUtil.get('main_portlet')) {
-                return;
-            }
-            
-            mainPortlet = createMainPortlet();
-            mainPortlet.initSticky();
-            
-            mUtil.addResizeHandler(function(){
-                mainPortlet.updateSticky();
-            });
-        },
-
-        resetMainPortlet: function() {
-            mainPortlet.destroySticky();
-            mainPortlet = createMainPortlet();
-            mainPortlet.initSticky();
         },
 
         initHeader: function() {
@@ -9543,25 +9429,18 @@ var mLayout = function() {
             initScrollTop();
         },
 
-        initAside: function() { 
+        initAside: function() {
             initLeftAside();
-            initLeftAsideMenu();
+            initLeftAsideMenu();            
             initLeftAsideToggle();
             initLeftAsideHide();
 
             this.onLeftSidebarToggle(function(e) {
-                //== Update sticky portlet
-                if (mainPortlet) {
-                    mainPortlet.updateSticky();
-                }
+              var datatables = $('.m-datatable');
 
-                //== Reload datatable
-                var datatables = $('.m-datatable');
-                if (datatables) {
-                    datatables.each(function() {
-                        $(this).mDatatable('redraw');
-                    });
-                }                
+                $(datatables).each(function() {
+                    $(this).mDatatable('redraw');
+                });
             });
         },
 
@@ -9572,7 +9451,7 @@ var mLayout = function() {
         onLeftSidebarToggle: function(handler) {
             if (asideLeftToggle) {
                 asideLeftToggle.on('toggle', handler);
-            }
+            }            
         },
 
         closeMobileAsideMenuOffcanvas: function() {

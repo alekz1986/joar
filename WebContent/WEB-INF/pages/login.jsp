@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><%=Ctes.NOMBRE_APLICACION%> | Login</title>
+    <title><%=Ctes.NAMEAPP%> | Login</title>
 
     <link href="<%=request.getContextPath()%>/recursos/css/bootstrap.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/recursos/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -53,26 +53,15 @@ String mensaje = (String) request.getAttribute("error");
                 
                 <% if (mensaje != null) { %>
                 <div><span style="font-size:12px;" class="text-danger">${error}</span></div>
-                <!--
-                <div class="alert alert-danger" style="padding: 3px; font-size: 12px;">${error}</div> 
-                -->
-                <!--
-                <small class="label label-danger">
-                	<i class="fa fa-clock-o"></i>${error}
-                </small>
-                -->
                 <p></p>
                 <% } %>
                 
                 
-                <button id="btnLogin" type="button" class="btn btn-primary block full-width m-b">Ingresar</button>
+                <!--<button id="btnLogin" type="button" class="btn btn-primary block full-width m-b">Ingresar</button>-->
+                <input type="submit" id="btnLogin" class="btn btn-primary block full-width m-b">Ingresar</button>
 
                 <a href="#"><small>¿Perdió su clave?</small></a>
                 
-                <!--
-                <p class="text-muted text-center"><small>Do not have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
-                -->
             </form>
             <p class="m-t"> <small>Copyright @ 2019 JoarSystem Lima Perú. Todos los derechos reservados</small> </p>
         </div>
@@ -84,12 +73,14 @@ String mensaje = (String) request.getAttribute("error");
     <script src="<%=request.getContextPath()%>/recursos/js/sha256.js"></script>
 	<script type="text/javascript" >
 		$(function() {
-			$("#btnLogin").click(function() {
+			//$("#btnLogin").click(function() {
+			$("#frmIngresar").submit(function(){
 				//var hash = sha256.create();
 				//hash.update("123456")
 				//console.log("hex = " + hash.hex());
 				$("#chash").val(sha256($("#clave").val()));
-				$("#frmIngresar").submit();
+				return true;
+				//$("#frmIngresar").submit();
 			});
 		});
 	</script>
